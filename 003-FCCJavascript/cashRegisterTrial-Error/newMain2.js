@@ -1,6 +1,6 @@
 function checkCashRegister(price, cash, cid) {
   let result = { status: "", change: [] };
-
+  let cashINDrawer = cid;
   let currencyUnit = [
     ["PENNY", 0.01],
     ["NICKEL", 0.05],
@@ -19,29 +19,30 @@ function checkCashRegister(price, cash, cid) {
 
   let customerChange = cash - price;
 
-  let baseChange = customerChange;
-
   if (customerChange > totalCid) {
     result.status = "INSUFFICIENT_FUNDS";
     return result;
   }
-  for (let i = cid.length - 1; i >= 0; i--) {
-    let [nameCID, valueCID] = cid[i];
+  for (let i = cashINDrawer.length - 1; i >= 0; i--) {
+    let [nameCID, valueCID] = cashINDrawer[i];
     let [currencyName, valueCurrency] = currencyUnit[i];
 
     let isFlag = true;
     let baseCIDValue = 0;
+
     while (isFlag) {
       if (customerChange >= valueCurrency) {
         if (valueCID == 0) {
           console.log("skip");
           isFlag = false;
+          result.change.unshift([currencyName, baseCIDValue]);
           break;
         }
         console.log("perform");
+
         customerChange -= valueCurrency;
         valueCID -= valueCurrency;
-        baseCIDValue += valueCurrency;
+
         customerChange = Math.round(customerChange * 100) / 100;
         valueCID = Math.round(valueCID * 100) / 100;
         baseCIDValue = Math.round(baseCIDValue * 100) / 100;
@@ -55,14 +56,24 @@ function checkCashRegister(price, cash, cid) {
       );
     }
   }
+  let baseChange = 0;
+  cashINDrawer.forEach(([, value]) => {
+    baseChange += value;
+  });
+  console.log(`CID: ${baseChange}}`);
+  if (baseChange > 0) {
+    result.status = "OPEN";
+  }
   if (0 != customerChange) {
     result.status = "INSUFFICIENT_FUNDS";
     result.change = [];
     return result;
   }
-  console.log(result, customerChange);
-  console.log("*********************************************************");
-  console.log(result);
+  if (customerChange === 0) {
+    result.status = "CLOSED";
+  }
+
+  console.log(customerChange);
   console.log("*********************************************************");
   return result;
 }
