@@ -1,6 +1,9 @@
 function checkCashRegister(price, cash, cid) {
+  function roundedUP(num) {
+    return Math.round(num * 100) / 100;
+  }
+
   let result = { status: "", change: [] };
-  let cashINDrawer = cid;
   let currencyUnit = [
     ["PENNY", 0.01],
     ["NICKEL", 0.05],
@@ -23,60 +26,65 @@ function checkCashRegister(price, cash, cid) {
     result.status = "INSUFFICIENT_FUNDS";
     return result;
   }
-  for (let i = cashINDrawer.length - 1; i >= 0; i--) {
-    let [nameCID, valueCID] = cashINDrawer[i];
+  for (let i = cid.length - 1; i >= 0; i--) {
+    let [nameCID, valueCID] = cid[i];
     let [currencyName, valueCurrency] = currencyUnit[i];
 
     let isFlag = true;
     let baseCIDValue = 0;
 
     while (isFlag) {
-      if (customerChange >= valueCurrency) {
-        if (valueCID == 0) {
-          console.log("skip");
-          isFlag = false;
-          result.change.unshift([currencyName, baseCIDValue]);
-          break;
-        }
+      if (customerChange >= valueCurrency && valueCID != 0) {
         console.log("perform");
 
         customerChange -= valueCurrency;
         valueCID -= valueCurrency;
+        baseCIDValue += valueCurrency;
 
-        customerChange = Math.round(customerChange * 100) / 100;
-        valueCID = Math.round(valueCID * 100) / 100;
-        baseCIDValue = Math.round(baseCIDValue * 100) / 100;
+        customerChange = roundedUP(customerChange);
+        valueCID = roundedUP(valueCID);
+        baseCIDValue = roundedUP(baseCIDValue);
       }
       if (valueCID === 0 || valueCurrency > customerChange) {
         isFlag = false;
-        result.change.unshift([currencyName, baseCIDValue]);
+        result.change.push([currencyName, baseCIDValue]);
       }
       console.log(
         `customerChange: ${customerChange},  cashier:[${nameCID}:${valueCID}]            currency:[${currencyName}:${valueCurrency}]`
       );
     }
   }
-  let baseChange = 0;
-  cashINDrawer.forEach(([, value]) => {
-    baseChange += value;
-  });
-  console.log(`CID: ${baseChange}}`);
-  if (baseChange > 0) {
-    result.status = "OPEN";
-  }
-  if (0 != customerChange) {
-    result.status = "INSUFFICIENT_FUNDS";
-    result.change = [];
-    return result;
-  }
-  if (customerChange === 0) {
-    result.status = "CLOSED";
-  }
+
+  // problems
+  // test 5 if the status is CLOSED return all CID
+  // test 3 // not enough fund but still perform the loop it should be return
+  // test 2 the status is okay but remvoe the index if the vaue is 0 in CID
+  // test 1 like test 2
+
+  // let baseChange = 0;
+  // cid.forEach(([, value]) => {
+  //   baseChange += value;
+  // });
+  // console.log(`CID: ${baseChange}}`);
+  // if (baseChange > 0) {
+  //   result.status = "OPEN";
+  // }
+  // if (0 != customerChange) {
+  //   result.status = "INSUFFICIENT_FUNDS";
+  //   result.change = [];
+  //   return result;
+  // }
+  // if (customerChange === 0) {
+  //   result.status = "CLOSED";
+  // }
 
   console.log(customerChange);
   console.log("*********************************************************");
   return result;
 }
+console.log(
+  "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
+);
 
 console.log(
   "---------------------------------------test1---------------------------------------"
@@ -93,9 +101,6 @@ console.log(
     ["TWENTY", 60],
     ["ONE HUNDRED", 100],
   ])
-);
-console.log(
-  "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN"
 );
 console.log(
   "---------------------------------------test2---------------------------------------"
