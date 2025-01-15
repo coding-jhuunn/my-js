@@ -32,8 +32,15 @@ function checkCashRegister(price, cash, cid) {
 
     let isFlag = true;
     let baseCIDValue = 0;
+    console.log(
+      `customerChange: ${customerChange},  cashier:[${nameCID}:${valueCID}]            currency:[${currencyName}:${valueCurrency}]`
+    );
 
     while (isFlag) {
+      if (valueCID === 0) {
+        isFlag = false;
+        break;
+      }
       if (customerChange >= valueCurrency && valueCID != 0) {
         console.log("perform");
 
@@ -49,9 +56,6 @@ function checkCashRegister(price, cash, cid) {
         isFlag = false;
         result.change.push([currencyName, baseCIDValue]);
       }
-      console.log(
-        `customerChange: ${customerChange},  cashier:[${nameCID}:${valueCID}]            currency:[${currencyName}:${valueCurrency}]`
-      );
     }
   }
 
@@ -61,11 +65,11 @@ function checkCashRegister(price, cash, cid) {
   // test 2 the status is okay but remvoe the index if the vaue is 0 in CID
   // test 1 like test 2
 
-  // let baseChange = 0;
-  // cid.forEach(([, value]) => {
-  //   baseChange += value;
-  // });
-  // console.log(`CID: ${baseChange}}`);
+  let baseChange = 0;
+  cid.forEach(([, value]) => {
+    baseChange += value;
+  });
+  console.log(`CID: ${baseChange}}`);
   // if (baseChange > 0) {
   //   result.status = "OPEN";
   // }

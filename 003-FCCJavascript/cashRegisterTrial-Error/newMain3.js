@@ -14,7 +14,7 @@ function checkCashRegister(price, cash, cid) {
     ["TWENTY", 20],
     ["ONE HUNDRED", 100],
   ];
-  let customerChange = cash - price;
+  let custwomerChange = cash - price;
 
   for (let i = cid.length - 1; i >= 0; i--) {
     let [nameCID, valueCID] = cid[i];
