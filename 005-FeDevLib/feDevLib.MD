@@ -36,4 +36,15 @@ focus() xecuted when the form field gets focus:
 blur() executed when the form field loses focus:
 on() method attaches one or more event handlers for the selected elements.
 
-scss
+sass
+
+/_ Define standard variables and values for website _/
+$bgcolor: lightblue;
+$textcolor: darkblue;
+$fontsize: 18px;
+
+/_ Use the variables _/
+
+background-color: $bgcolor;
+color: $textcolor;
+font-size: $fontsize;
