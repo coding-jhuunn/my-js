@@ -1,0 +1,15 @@
+$bgcolor: lightblue;
+$textcolor: orange;
+$textRuler: black;
+$fontsize: 18px;
+body {
+  background-color: $bgcolor;
+  color: $textcolor;
+  font-size: $fontsize;
+  border: $textRuler 5px;
+}
+div {
+  border: $textRuler 5px;
+  height: 25px;
+  width: 25px;
+}
