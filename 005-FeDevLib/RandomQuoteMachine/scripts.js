@@ -1,24 +1,35 @@
-// const api_url = "https://quotes-api-self.vercel.app/quote";
+const api_url = "https://quotes-api-self.vercel.app/quote";
 
-// async function getapi(url) {
-//   const response = await fetch(url);
-//   var data = await response.json();
-//   return data;
+// function loadData() {
+//   let result = {};
+
+//   fetchData(api_url, result);
+//   $("text").text(result.quote);
+//   $("author").text(result.author);
+//   console.log(result);
+//   console.log(result.quote);
 // }
+// $(function () {
+//   loadData();
+// });
+$(document).ready(function () {});
 
-// let value = getapi(api_url);
+let dataStore;
 
-// console.log(value);
-// "https://quotes-api-self.vercel.app/quote"
-// api to be used
-const settings = {
-  async: true,
-  crossDomain: true,
-  url: "https://quotes-api-self.vercel.app/quote",
-  method: "GET",
-};
+async function fetchData() {
+  try {
+    let response = await fetch(api_url);
+    dataStore = await response.json(); // Store data in variable
+    $("#text").text(dataStore.quote);
+    $("#author").text(dataStore.author);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+$("#new-quote").click(function () {
+  fetchData();
+});
 
-$.ajax(settings).done(function (response) {
-  const data = JSON.parse(response);
-  console.log(data);
+$(document).ready(function () {
+  fetchData();
 });
