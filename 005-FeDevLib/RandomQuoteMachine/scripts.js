@@ -1,17 +1,5 @@
 const api_url = "https://quotes-api-self.vercel.app/quote";
 
-// function loadData() {
-//   let result = {};
-
-//   fetchData(api_url, result);
-//   $("text").text(result.quote);
-//   $("author").text(result.author);
-//   console.log(result);
-//   console.log(result.quote);
-// }
-// $(function () {
-//   loadData();
-// });
 $(document).ready(function () {});
 
 let dataStore;
@@ -33,3 +21,15 @@ $("#new-quote").click(function () {
 $(document).ready(function () {
   fetchData();
 });
+
+const colorPallete = [
+  "#1a1c2c",
+  "#5d275d",
+  "#b13e53",
+  "#ef7d57",
+  "#ffcd75",
+  "#257179",
+  "#29366f",
+  "#333c57",
+  "#3b5dc9",
+];
