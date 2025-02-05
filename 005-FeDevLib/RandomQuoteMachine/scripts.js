@@ -20,8 +20,8 @@ async function fetchData() {
     dataStore = await response.json(); // Store data in variable
     $("#text").text(dataStore.quote);
     $("#author").text(dataStore.author);
-    let colorBG = colorPallete[0];
-    $("body").css("background-color", colorPallete[1]);
+    const randomIndex = Math.floor(Math.random() * colorPallete.length);
+    $("body").css("background-color", colorPallete[randomIndex]);
   } catch (error) {
     console.error("Error:", error);
   }
