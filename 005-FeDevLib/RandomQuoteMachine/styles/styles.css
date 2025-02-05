@@ -1,4 +1,16 @@
 body {
   color: red;
-  background-color: black;
+  background-color: #1a1c2c;
+  height: 100%;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 100vh; /* Full viewport height */
+  margin: 0;
+}
+#main-box {
+  width: 500px;
+  height: 200px;
+  background-color: lightblue;
+  text-align: center;
 }

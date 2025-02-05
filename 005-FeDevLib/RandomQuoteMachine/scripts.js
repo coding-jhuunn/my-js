@@ -1,6 +1,5 @@
 const api_url = "https://quotes-api-self.vercel.app/quote";
 const colorPallete = [
-  "#1a1c2c",
   "#5d275d",
   "#b13e53",
   "#ef7d57",
