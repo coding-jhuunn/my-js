@@ -12,7 +12,9 @@ const colorPallete = [
 $(document).ready(function () {});
 
 let dataStore;
-
+$("#new-quote").click(function () {
+  fetchData();
+});
 async function fetchData() {
   try {
     let response = await fetch(api_url);
