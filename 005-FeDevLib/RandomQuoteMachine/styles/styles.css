@@ -7,10 +7,55 @@ body {
   align-items: center; /* Centers vertically */
   height: 100vh; /* Full viewport height */
   margin: 0;
+  font-family: "Roboto", serif;
+}
+a {
+  color: white;
+  text-decoration: none;
 }
 #main-box {
   width: 500px;
-  height: 200px;
-  background-color: lightblue;
+
+  min-height: 200px;
+  background-color: black;
   text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 30px;
+  border-radius: 25px;
+}
+#text {
+  font-size: 24px;
+}
+#author {
+  font-size: 20px;
+}
+
+#credit-box {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+
+  align-items: center;
+}
+
+#new-quote {
+  background-color: black;
+  color: white;
+  padding: 12px;
+  width: 120px;
+  border: 1px solid white;
+  border-radius: 25px;
+}
+#new-quote:hover {
+  background-color: white;
+  color: black;
+  padding: 12px;
+  width: 120px;
+  border: 1px solid white;
+  border-radius: 25px;
+  cursor: pointer;
 }
