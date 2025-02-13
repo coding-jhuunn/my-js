@@ -14,7 +14,7 @@ This is to prevent any jQuery code from running before the document is finished 
 
 ## Selectors
 
-ex
+brex
 
 > $("p") - 
 html element
