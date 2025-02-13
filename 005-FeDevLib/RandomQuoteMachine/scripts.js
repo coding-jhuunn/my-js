@@ -1,15 +1,31 @@
 const api_url = "https://quotes-api-self.vercel.app/quote";
-const colorPallete = [
-  "#5d275d",
-  "#b13e53",
-  "#ef7d57",
-  "#ffcd75",
-  "#257179",
-  "#29366f",
-  "#333c57",
-  "#3b5dc9",
+
+const hexColorIndex = [
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+  "0",
+  "a",
+  "b",
+  "c",
+  "d",
+  "e",
+  "f",
 ];
-$(document).ready(function () {});
+let hexColorFinal = "#";
+function randomHexColor(arr) {
+  for (let index = 0; index < 6; index++) {
+    const randomIndex = Math.floor(Math.random() * hexColorIndex.length);
+    hexColorFinal += arr[randomIndex];
+  }
+  return hexColorFinal;
+}
 
 let dataStore;
 $("#new-quote").click(function () {
@@ -21,11 +37,11 @@ async function fetchData() {
     dataStore = await response.json(); // Store data in variable
     $("#text").text(dataStore.quote);
     $("#author").text(dataStore.author);
-    const randomIndex = Math.floor(Math.random() * colorPallete.length);
-    $("body").css("background-color", colorPallete[randomIndex]);
+    let colorPallete = randomHexColor(hexColorIndex);
+    $("body").css("background-color", colorPallete);
   } catch (error) {
     console.error("Error:", error);
   }
 }
-console.log(colorPallete[2]);
+
 fetchData();
